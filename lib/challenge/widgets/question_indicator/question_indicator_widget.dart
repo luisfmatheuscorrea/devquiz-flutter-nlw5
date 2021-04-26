@@ -34,7 +34,8 @@ class QuestionIndicatorWidget extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          ProgressIndicatorWidget(value: currentPage / length)
+          ProgressIndicatorWidget(
+              value: currentPage == 1 ? 0 : (currentPage / length) - 0.125)
         ],
       ),
     );

@@ -54,9 +54,6 @@ class _HomePageState extends State<HomePage> {
                     LevelButtonWidget(
                       label: "Difícil",
                     ),
-                    LevelButtonWidget(
-                      label: "Períto",
-                    ),
                   ],
                 ),
               ),
@@ -77,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                                 CupertinoPageRoute(
                                   builder: (context) => ChallengePage(
                                     questions: e.questions,
+                                    title: e.title,
                                   ),
                                 ),
                               );
@@ -93,7 +91,7 @@ class _HomePageState extends State<HomePage> {
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+            valueColor: AlwaysStoppedAnimation<Color>(AppColors.redPrimary),
           ),
         ),
       );

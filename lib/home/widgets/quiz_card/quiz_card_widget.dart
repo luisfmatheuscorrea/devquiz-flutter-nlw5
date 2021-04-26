@@ -33,7 +33,7 @@ class QuizCardWidget extends StatelessWidget {
             Container(
               height: 40,
               width: 40,
-              child: Image.asset(AppImages.blocks),
+              child: Image.asset(AppImages.bible),
             ),
             SizedBox(
               height: 24,

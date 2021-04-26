@@ -3,12 +3,15 @@ import 'package:DevQuiz/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:DevQuiz/challenge/widgets/question_indicator/question_indicator_widget.dart';
 import 'package:DevQuiz/challenge/widgets/quiz/quiz_widget.dart';
 import 'package:DevQuiz/core/app_colors.dart';
+import 'package:DevQuiz/result/result_page.dart';
 import 'package:DevQuiz/shared/models/question_model.dart';
 import 'package:flutter/material.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
-  ChallengePage({Key? key, required this.questions}) : super(key: key);
+  final String title;
+  ChallengePage({Key? key, required this.questions, required this.title})
+      : super(key: key);
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
@@ -32,6 +35,13 @@ class _ChallengePageState extends State<ChallengePage> {
         duration: Duration(milliseconds: 300),
         curve: Curves.easeIn,
       );
+  }
+
+  void onSelected(bool value) {
+    if (value) {
+      controller.qntAnswerRight++;
+    }
+    nextPage();
   }
 
   @override
@@ -67,7 +77,7 @@ class _ChallengePageState extends State<ChallengePage> {
           children: widget.questions
               .map((e) => QuizWidget(
                     question: e,
-                    onChange: nextPage,
+                    onSelected: onSelected,
                   ))
               .toList(),
         ),
@@ -84,7 +94,14 @@ class _ChallengePageState extends State<ChallengePage> {
                             child: NextButtonWidget.green(
                               label: "Finalizar",
                               onTap: () {
-                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResultPage(
+                                              result: controller.qntAnswerRight,
+                                              title: widget.title,
+                                              length: widget.questions.length,
+                                            )));
                               },
                             ),
                           ),
